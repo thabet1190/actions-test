@@ -9,3 +9,18 @@ jobs:
     steps:
       - name: Vulnerable issue title
         run: 'echo "New issue title is: ${{ github.event.issue.title }}"'
+name: Injection Test
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  injection-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Safe issue title
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: echo "New issue title is: $ISSUE_TITLE"
+
