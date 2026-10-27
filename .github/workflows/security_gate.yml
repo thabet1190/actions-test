@@ -1,0 +1,13 @@
+name: Security Gate
+
+on:
+  push:
+
+jobs:
+  security-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for forbidden files
+        run: '[ -f passwords.txt ] && exit 1 || exit 0'
